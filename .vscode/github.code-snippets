@@ -1,0 +1,77 @@
+{
+	 
+	"action": {
+	 	//"scope": "javascript,typescript",
+	 	"prefix": "action",
+	 	"body": [
+	  		"name: $1",
+			"on:",
+			"  pull_request:",
+			"    types:",
+			"      - closed",
+			"    branches:",
+			"      - main",
+			"jobs:",
+			"  $2:",
+			"    if: github.event.pull_request.merged == true",
+    		"    runs-on: ubuntu-latest",
+    		"    steps:",
+			"    - run: |",
+			"        cat README.md"
+	 	],
+	  	"description": "Log output to console"
+	  },
+
+	  "checkout": {
+		//"scope": "javascript,typescript",
+		"prefix": "checkout",
+		"body": [
+		   "- uses: actions/checkout@v2",
+		   "  name: Check out repository"
+		],
+		 "description": "Log output to console"
+	 },
+	 "dockerlogin": {
+		//"scope": "javascript,typescript",
+		"prefix": "login",
+		"body": [
+		   "- name: Log in to Docker Hub",
+		   "  uses: docker/login-action@v1",
+		   "  with:",
+		   "    username: ${{ secrets.$1 }}",
+		   "    password: ${{ secrets.$2 }}"
+		],
+		 "description": "Log output to console"
+	 },
+
+	 "meta": {
+		//"scope": "javascript,typescript",
+		"prefix": "meta",
+		"body": [
+		   "- name: Extract metadata (tags, labels) for Docker",
+		   "  id: meta",
+		   "  uses: docker/metadata-action@v1",
+		   "  with:",
+		   "    images: $1/$2" 
+		],
+		 "description": "Log output to console"
+	 },
+	 "push": {
+		//"scope": "javascript,typescript",
+		"prefix": "push",
+		"body": [
+		   "- name: Build and push Docker image",
+		   "  uses: docker/build-push-action@v2",
+		   "  with:",
+		   "    context: .",
+		   "    push: true",
+		   "    tags: $1/$2:\\${{ github.sha }}"
+		],
+		 "description": "Log output to console"
+	 },
+
+
+
+	}
+ 
+ 
