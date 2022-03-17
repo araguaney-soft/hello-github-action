@@ -33,7 +33,7 @@
 	 },
 	 "dockerlogin": {
 		//"scope": "javascript,typescript",
-		"prefix": "checkout",
+		"prefix": "login",
 		"body": [
 		   "- name: Log in to Docker Hub",
 		   "  uses: docker/login-action@v1",

@@ -10,5 +10,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - run: |
+    - uses: actions/checkout@v2
+      name: Check out repository
+     - run: |
         cat README.md
