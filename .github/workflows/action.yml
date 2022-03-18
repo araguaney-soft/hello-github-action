@@ -1,4 +1,4 @@
-name: hello-world
+name: hello-github-action-ci
 on:
   pull_request:
     types:
@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  hello-github-action-ci:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
